@@ -1,8 +1,10 @@
+using Funcion;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 var app = builder.Build();
+var mate = new Mate();
 
 // Configure the HTTP request pipeline.
 
@@ -24,6 +26,18 @@ app.MapGet("/weatherforecast", () =>
         ))
         .ToArray();
     return forecast;
+});
+
+app.MapGet("/sumar", (double a, double b) =>
+{
+    var resultado = mate.Sumar(a, b);
+    return Results.Ok(new { a, b, resultado });
+});
+
+app.MapGet("/restar", (double a, double b) =>
+{
+    var resultado = mate.Restar(a, b);
+    return Results.Ok(new { a, b, resultado });
 });
 
 app.Run();
